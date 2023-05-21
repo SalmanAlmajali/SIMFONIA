@@ -1,5 +1,4 @@
 function validate(nim, password) {
-    console.log(nim.value)
     if(nim.value.length < 9) {
         Swal.fire({
             title: 'Error!',

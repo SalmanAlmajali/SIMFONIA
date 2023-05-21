@@ -27,11 +27,12 @@
                         </label>
                     </div>
                     
-                    <input type="submit" value="Log In" class="p-2 bg-[#0059DB] rounded-lg font-medium uppercase text-sm text-white hover:bg-[#0059DB]">
+                    <input type="submit" value="Log In" class="p-2 bg-[#0059DB] rounded-lg font-medium uppercase text-sm text-white hover:bg-[#0059DB] cursor-pointer">
                 </form>
             
                 <a href="./register.html" class="ml-4 font-medium text-sm underline">Register</a>
             </div>
+            <p class="ml-4 font-medium text-sm">Kesempatan login anda : <span id="counter"></span></p>
         </div>
     </div>
 
@@ -44,6 +45,8 @@
         if(active) {
             location.replace('./dashboard.html')
         }
+
+        document.getElementById('counter').innerHTML = parseInt(localStorage.getItem('counter'))
 
         function loginUser() {
             var form = document.getElementById("logInForm")
@@ -71,22 +74,27 @@
                                 text: 'User does not exist!',
                                 icon: 'error',
                                 confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (parseInt(localStorage.getItem('counter')) == 0) {
+                                    location.replace('./error.html')
+                                }
                             })
+                            
                             failCounter(true)
+                            document.getElementById('counter').innerHTML = parseInt(localStorage.getItem('counter'))
                         }
 					}
 				};
-				xhr.send(formData);
+				xhr.send(formData)
             } else {
-                console.log('Gagal');
-                failCounter(true)
+                console.log('Gagal')
             }
         }
 
         var form = document.getElementById("logInForm")
         form.addEventListener("submit", function(event) {
             event.preventDefault()
-            loginUser()
+                loginUser()
         })
     </script>
 </body>
