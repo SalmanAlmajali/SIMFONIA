@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+<?php require 'partials/login_head.php'; ?>
+
 <body>
     <div class="container mx-auto px-4 py-4 h-screen flex justify-center items-center">
         <div class="flex flex-col gap-y-4 w-full md:w-1/2 lg:w-1/3">
@@ -28,9 +21,7 @@
                     </div>
                     
                     <input type="submit" value="Log In" class="p-2 bg-[#0059DB] rounded-lg font-medium uppercase text-sm text-white hover:bg-[#0059DB] cursor-pointer">
-                </form>
-            
-                <a href="./register.html" class="ml-4 font-medium text-sm underline">Register</a>
+                </form>            
             </div>
             <p class="ml-4 font-medium text-sm">Kesempatan login anda : <span id="counter"></span></p>
         </div>
@@ -39,11 +30,10 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="./js/failCounter.js"></script>
     <script src="./js/loginValidation.js"></script>
-    <script src="./js/getUserActive.js"></script>
     <script>
         var active = localStorage.getItem('active')
         if(active) {
-            location.replace('./dashboard.html')
+            location.replace('/dashboard')
         }
 
         document.getElementById('counter').innerHTML = parseInt(localStorage.getItem('counter'))
@@ -58,7 +48,7 @@
 
             if(validate(nim, password)) {
                 var xhr = new XMLHttpRequest();
-				xhr.open("POST", "process/process_login.php", true);
+				xhr.open("POST", "process/index.php", true);
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState === 4 && xhr.status === 200) {
                         var users = JSON.parse(xhr.response)
@@ -67,7 +57,7 @@
                         var user = users.find((item) => item[0] == nim.value && item[3] == password.value)
                         if(user) {
                             localStorage.setItem('active', user)
-                            location.replace('./dashboard.html')
+                            location.replace('/dashboard')
                         } else {
                             Swal.fire({
                                 title: 'Error!',
@@ -76,7 +66,7 @@
                                 confirmButtonText: 'Ok'
                             }).then((result) => {
                                 if (parseInt(localStorage.getItem('counter')) == 0) {
-                                    location.replace('./error.html')
+                                    location.replace('/error')
                                 }
                             })
                             

@@ -56,7 +56,7 @@
 	<script src="./js/registerValidation.js"></script>
 	<script>
 		function registerUser() {
-			var form = document.getElementById("registrationForm");
+			var form = document.getElementById("registrationForm")
 
 			var nim = document.getElementById('nim')
 			var name = document.getElementById('name')
@@ -64,16 +64,15 @@
 			var password = document.getElementById('password')
 			var passwordConfirmation = document.getElementById('password_confirmation')
 
-			var formData = new FormData(form);
+			var formData = new FormData(form)
 
 			if(validate(nim, name, email, password, passwordConfirmation)) {
-				// Send the data to the server
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", "process/process_registration.php", true);
+				var xhr = new XMLHttpRequest()
+				xhr.open("POST", "process/registration.php", true);
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState === 4 && xhr.status === 200) {
 						// Handle the server's response
-						console.log(xhr.response);
+						console.log(xhr.response)
 						alert(xhr.responseText)
 					}
 				};
@@ -84,11 +83,10 @@
 
 		}
 
-		// Attach the function to the form's submit event
 		var form = document.getElementById("registrationForm");
 		form.addEventListener("submit", function(event) {
-			event.preventDefault(); // Prevent the form from submitting normally
-			registerUser(); // Call the registration function
+			event.preventDefault()
+			registerUser()
 		});
 	</script>
 </body>

@@ -7,7 +7,7 @@ function validate(nim, password) {
             confirmButtonText: 'Cool'
         })
         return false
-    } if(!nim.checkValidity()) {
+    } else if(!nim.checkValidity()) {
         Swal.fire({
             title: 'Error!',
             text: nim.validationMessage,
